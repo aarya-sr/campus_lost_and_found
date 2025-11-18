@@ -5,6 +5,8 @@ import User from '../models/user.js';
 
 const router = express.Router();
 
+app.use(express.json());
+
 // Signup
 router.post('/signup', async (req, res) => {
     try{
