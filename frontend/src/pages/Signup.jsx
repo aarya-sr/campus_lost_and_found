@@ -7,12 +7,12 @@ export default function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    console.log(process.env.API_URL);
+    console.log(process.env.VITE_API_URL);
 
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`${process.env.API_URL}/api/auth/signup`, {
+            const res = await axios.post(`${process.env.VITE_API_URL}/api/auth/signup`, {
                 username,
                 email,
                 password
