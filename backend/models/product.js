@@ -26,16 +26,21 @@
 
 
 
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const productSchema = new mongoose.Schema(
+const lostFoundItemSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    category: { type: String },
-    price: { type: Number, required: true },
-    inStock: { type: Boolean, default: true },
+    category: { type: String, required: true },
+    description: { type: String, required: true },
+    location: { type: String, required: true },
+    itemType: { type: String, enum: ["lost", "found"], required: true },
+    image: { type: String },
+    postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+    isFlagged: { type: Boolean, default: false },
+    isRemoved: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Product", productSchema);
+export default mongoose.model("LostFoundItem", lostFoundItemSchema);

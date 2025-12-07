@@ -1,57 +1,102 @@
-import { useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import api from "../api";
 
-export default function Login() {
+function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
-                email,
-                password
-            });
+    try {
+      const res = await api.post("/auth/login", {
+        email,
+        password,
+      });
 
-            alert(res.data.message);
-            localStorage.setItem("token", res.data.token);
+      localStorage.setItem("token", res.data.token);
+      navigate("/products");
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed. Please check your credentials.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        } catch (err) {
-            alert(err.response?.data?.message || "Login failed");
-        }
-    };
-
-    return (
-        <div className="flex justify-center items-center h-screen bg-gray-100 px-4">
-            <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
-                <h2 className="text-3xl font-bold text-center mb-6">Login</h2>
-
-                <form onSubmit={handleLogin}>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        className="w-full p-3 border rounded-xl mb-4 outline-none focus:ring-2 focus:ring-blue-500"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        className="w-full p-3 border rounded-xl mb-6 outline-none focus:ring-2 focus:ring-blue-500"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-600 text-white p-3 rounded-xl hover:bg-blue-700 transition"
-                    >
-                        Login
-                    </button>
-                </form>
-            </div>
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4 py-12">
+      <div className="max-w-md w-full">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl mb-4 shadow-lg">
+            <span className="text-white font-bold text-2xl">L</span>
+          </div>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Welcome Back</h1>
+          <p className="text-gray-600">Sign in to continue to Campus Lost & Found</p>
         </div>
-    );
+
+        <div className="card">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+                {error}
+              </div>
+            )}
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="input-field"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="input-field"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-indigo-600 font-semibold hover:text-indigo-700">
+                Sign up
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+
+export default Login;
