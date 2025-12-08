@@ -33,24 +33,48 @@ function Login() {
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl mb-4 shadow-lg">
-            <span className="text-white font-bold text-2xl">L</span>
+          <div className="inline-flex items-center justify-center mb-4">
+            <div className="logo-icon">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-gray-300"
+              >
+                <path
+                  d="M10 2L3 7V17H8V12H12V17H17V7L10 2Z"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+                <circle
+                  cx="10"
+                  cy="7"
+                  r="1.5"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
           </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-          <p className="text-gray-600">Sign in to continue to Campus Lost & Found</p>
+          <h1 className="text-3xl font-semibold text-gray-100 mb-2">Welcome back</h1>
+          <p className="text-gray-500 text-sm">Sign in to locatr</p>
         </div>
 
         <div className="card">
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
-              <div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm">
+              <div className="bg-gray-800/50 border border-red-900/30 text-red-400 px-4 py-3 rounded-lg text-sm">
                 {error}
               </div>
             )}
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Email Address
+              <label className="block text-sm font-medium text-gray-400 mb-2">
+                Email
               </label>
               <input
                 type="email"
@@ -63,7 +87,7 @@ function Login() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-400 mb-2">
                 Password
               </label>
               <input
@@ -86,9 +110,9 @@ function Login() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-500">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-indigo-600 font-semibold hover:text-indigo-700">
+              <Link to="/signup" className="text-gray-300 hover:text-gray-100 font-medium">
                 Sign up
               </Link>
             </p>

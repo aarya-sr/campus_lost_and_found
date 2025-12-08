@@ -1,7 +1,7 @@
 {
   "name": "campus_lost_and_found",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon backend/server.js",
     "start": "node backend/server.js"

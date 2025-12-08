@@ -162,21 +162,21 @@ function Products() {
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-5xl font-bold text-gray-900 mb-3">
-            Campus Lost & Found
+        <div className="mb-8">
+          <h1 className="text-3xl font-semibold text-gray-100 mb-2">
+            Lost & Found
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-gray-500 text-sm">
             Help reunite lost items with their owners
           </p>
         </div>
 
-        <div className="mb-8 card">
-          <div className="flex flex-wrap gap-3 mb-4">
+        <div className="mb-6 card">
+          <div className="flex flex-wrap gap-3">
             <div className="flex-1 min-w-[200px]">
               <input
                 type="text"
-                placeholder="Search by name, description, or location..."
+                placeholder="Search..."
                 value={search}
                 onChange={(e) => {
                   setPage(1);
@@ -217,8 +217,8 @@ function Products() {
               onChange={(e) => setSortBy(e.target.value)}
               className="input-field min-w-[150px]"
             >
-              <option value="createdAt">Date Posted</option>
-              <option value="itemType">Item Type</option>
+              <option value="createdAt">Date</option>
+              <option value="itemType">Type</option>
               <option value="name">Name</option>
             </select>
             <select
@@ -233,7 +233,7 @@ function Products() {
         </div>
 
         {user && (
-          <div className="mb-6 text-center">
+          <div className="mb-6">
             <button
               onClick={() => {
                 setShowForm(!showForm);
@@ -245,32 +245,32 @@ function Products() {
               }}
               className="btn-primary"
             >
-              {showForm ? "Cancel" : editingId ? "Cancel Edit" : "+ Post New Item"}
+              {showForm ? "Cancel" : editingId ? "Cancel Edit" : "+ Post Item"}
             </button>
           </div>
         )}
 
         {showForm && user && (
           <div className="mb-8 card">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              {editingId ? "Edit Item" : "Post Lost/Found Item"}
+            <h2 className="text-lg font-medium text-gray-200 mb-6">
+              {editingId ? "Edit Item" : "Post Item"}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-400 mb-2">
                     Item Name *
                   </label>
                   <input
                     required
-                    placeholder="e.g., iPhone 13, Blue Backpack"
+                    placeholder="Item name"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     className="input-field"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-400 mb-2">
                     Category *
                   </label>
                   <select
@@ -290,12 +290,12 @@ function Products() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-400 mb-2">
                   Description *
                 </label>
                 <textarea
                   required
-                  placeholder="Describe the item in detail..."
+                  placeholder="Description"
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   className="input-field min-h-[100px]"
@@ -304,20 +304,20 @@ function Products() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-400 mb-2">
                     Location *
                   </label>
                   <input
                     required
-                    placeholder="e.g., Library, Cafeteria, Building A"
+                    placeholder="Location"
                     value={form.location}
                     onChange={(e) => setForm({ ...form, location: e.target.value })}
                     className="input-field"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Item Type *
+                  <label className="block text-sm font-medium text-gray-400 mb-2">
+                    Type *
                   </label>
                   <select
                     required
@@ -332,7 +332,7 @@ function Products() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-400 mb-2">
                   Image (Optional)
                 </label>
                 <input
@@ -345,14 +345,14 @@ function Products() {
                   <img
                     src={imagePreview}
                     alt="Preview"
-                    className="mt-3 rounded-xl max-w-xs max-h-48 object-cover border-2 border-gray-200"
+                    className="mt-3 rounded-lg max-w-xs max-h-48 object-cover border border-gray-800"
                   />
                 )}
               </div>
 
               <div className="flex gap-3 pt-2">
                 <button type="submit" className="btn-primary">
-                  {editingId ? "Update Item" : "Post Item"}
+                  {editingId ? "Update" : "Post"}
                 </button>
                 <button
                   type="button"
@@ -373,27 +373,26 @@ function Products() {
 
         {items.length === 0 ? (
           <div className="text-center py-16">
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-2xl font-semibold text-gray-700 mb-2">No items found</h3>
-            <p className="text-gray-500">Try adjusting your search or filters</p>
+            <h3 className="text-lg font-medium text-gray-400 mb-2">No items found</h3>
+            <p className="text-gray-600 text-sm">Try adjusting your search or filters</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
             {items.map((item) => (
-              <div key={item._id} className="card group hover:scale-[1.02] transition-transform">
+              <div key={item._id} className="card hover:border-gray-700 transition-colors">
                 {item.image && (
-                  <div className="relative overflow-hidden rounded-xl mb-4 -m-6 mt-0">
+                  <div className="relative overflow-hidden rounded-lg mb-4 -m-6 mt-0">
                     <img
                       src={`http://localhost:5001${item.image}`}
                       alt={item.name}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-48 object-cover"
                     />
                     <div className="absolute top-3 right-3">
                       <span
-                        className={`px-3 py-1 rounded-full text-xs font-bold ${
+                        className={`px-2.5 py-1 rounded text-xs font-medium backdrop-blur-sm ${
                           item.itemType === "lost"
-                            ? "bg-red-500 text-white"
-                            : "bg-green-500 text-white"
+                            ? "bg-gray-900/80 text-gray-300 border border-gray-700"
+                            : "bg-gray-900/80 text-gray-300 border border-gray-700"
                         }`}
                       >
                         {item.itemType.toUpperCase()}
@@ -402,55 +401,42 @@ function Products() {
                   </div>
                 )}
                 {!item.image && (
-                  <div className="relative overflow-hidden rounded-xl mb-4 -m-6 mt-0 bg-gradient-to-br from-indigo-100 to-purple-100 h-48 flex items-center justify-center">
-                    <span className="text-6xl">📦</span>
+                  <div className="relative overflow-hidden rounded-lg mb-4 -m-6 mt-0 bg-gray-800/50 h-48 flex items-center justify-center border-b border-gray-800">
+                    <span className="text-4xl opacity-30">📦</span>
                     <div className="absolute top-3 right-3">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-bold ${
-                          item.itemType === "lost"
-                            ? "bg-red-500 text-white"
-                            : "bg-green-500 text-white"
-                        }`}
-                      >
+                      <span className="px-2.5 py-1 rounded text-xs font-medium bg-gray-900/80 text-gray-300 border border-gray-700 backdrop-blur-sm">
                         {item.itemType.toUpperCase()}
                       </span>
                     </div>
                   </div>
                 )}
 
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.name}</h3>
-                <p className="text-gray-600 mb-3 line-clamp-2">{item.description}</p>
+                <h3 className="text-lg font-semibold text-gray-100 mb-2">{item.name}</h3>
+                <p className="text-gray-400 text-sm mb-4 line-clamp-2 leading-relaxed">{item.description}</p>
 
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <span className="font-semibold mr-2">📍</span>
-                    {item.location}
+                <div className="space-y-1.5 mb-4 text-sm">
+                  <div className="text-gray-500">
+                    <span className="text-gray-400">📍</span> {item.location}
                   </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <span className="font-semibold mr-2">🏷️</span>
-                    {item.category}
+                  <div className="text-gray-500">
+                    <span className="text-gray-400">🏷️</span> {item.category}
                   </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-semibold mr-2">👤</span>
-                    {item.postedBy?.username || "Unknown"}
-                  </div>
-                  <div className="flex items-center text-sm text-gray-500">
-                    <span className="font-semibold mr-2">📅</span>
-                    {new Date(item.createdAt).toLocaleDateString()}
+                  <div className="text-gray-600 text-xs">
+                    {item.postedBy?.username || "Unknown"} · {new Date(item.createdAt).toLocaleDateString()}
                   </div>
                 </div>
 
                 {item.isFlagged && (
-                  <div className="mb-3 px-3 py-2 bg-yellow-50 border-2 border-yellow-200 rounded-lg">
-                    <p className="text-yellow-700 text-xs font-semibold">⚠️ Flagged for review</p>
+                  <div className="mb-3 px-3 py-2 bg-gray-800/50 border border-yellow-900/30 rounded text-xs text-yellow-400/80">
+                    ⚠️ Flagged for review
                   </div>
                 )}
 
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-800">
                   {!isAdmin && (
                     <button
                       onClick={() => flagItem(item._id)}
-                      className="px-3 py-1.5 text-xs font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                      className="px-3 py-1.5 text-xs font-medium text-gray-400 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 hover:text-gray-300 transition-colors"
                     >
                       Flag
                     </button>
@@ -458,7 +444,7 @@ function Products() {
                   {isAdmin && (
                     <button
                       onClick={() => removeItem(item._id)}
-                      className="px-3 py-1.5 text-xs font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors"
+                      className="px-3 py-1.5 text-xs font-medium text-gray-300 bg-gray-800 border border-red-900/50 rounded hover:bg-gray-700 transition-colors"
                     >
                       Remove
                     </button>
@@ -468,13 +454,13 @@ function Products() {
                     <>
                       <button
                         onClick={() => startEdit(item)}
-                        className="px-3 py-1.5 text-xs font-semibold text-indigo-700 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors"
+                        className="px-3 py-1.5 text-xs font-medium text-gray-400 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 hover:text-gray-300 transition-colors"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => deleteOne(item._id)}
-                        className="px-3 py-1.5 text-xs font-semibold text-red-700 bg-red-50 rounded-lg hover:bg-red-100 transition-colors"
+                        className="px-3 py-1.5 text-xs font-medium text-gray-400 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 hover:text-gray-300 transition-colors"
                       >
                         Delete
                       </button>
@@ -487,21 +473,21 @@ function Products() {
         )}
 
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-4 mt-8">
+          <div className="flex justify-center items-center gap-3 mt-8">
             <button
               disabled={page === 1}
               onClick={() => setPage(page - 1)}
-              className="px-6 py-2 bg-white border-2 border-gray-300 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="btn-secondary disabled:opacity-30 disabled:cursor-not-allowed text-sm px-4 py-2"
             >
               Previous
             </button>
-            <span className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-semibold">
-              Page {page} of {totalPages}
+            <span className="px-4 py-2 text-sm text-gray-400">
+              {page} / {totalPages}
             </span>
             <button
               disabled={page === totalPages || totalPages === 0}
               onClick={() => setPage(page + 1)}
-              className="px-6 py-2 bg-white border-2 border-gray-300 rounded-xl font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="btn-secondary disabled:opacity-30 disabled:cursor-not-allowed text-sm px-4 py-2"
             >
               Next
             </button>
