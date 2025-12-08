@@ -50,22 +50,26 @@
 
 
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Navbar from "./components/Navbar";
 import Products from "./pages/Products";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Support from "./pages/Support";
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-        {/* 👉 default page */}
-        <Route path="/" element={<Products />} />
-
-        {/* you can also go explicitly to /products */}
-        <Route path="/products" element={<Products />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/browse" element={<Products />} />
+        <Route path="/report" element={<Products startWithForm />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/support" element={<Support />} />
+        <Route path="/products" element={<Navigate to="/browse" replace />} />
 
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

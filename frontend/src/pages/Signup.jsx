@@ -33,9 +33,9 @@ export default function Signup() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center mb-4">
+      <div className="max-w-md w-full space-y-6">
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center justify-center">
             <div className="logo-icon">
               <svg
                 width="24"
@@ -43,7 +43,7 @@ export default function Signup() {
                 viewBox="0 0 20 20"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="text-gray-300"
+                className="text-white"
               >
                 <path
                   d="M10 2L3 7V17H8V12H12V17H17V7L10 2Z"
@@ -53,31 +53,24 @@ export default function Signup() {
                   strokeLinejoin="round"
                   fill="none"
                 />
-                <circle
-                  cx="10"
-                  cy="7"
-                  r="1.5"
-                  fill="currentColor"
-                />
+                <circle cx="10" cy="7" r="1.5" fill="currentColor" />
               </svg>
             </div>
           </div>
-          <h1 className="text-3xl font-semibold text-gray-100 mb-2">Create account</h1>
-          <p className="text-gray-500 text-sm">Join locatr today</p>
+          <h1 className="text-3xl font-bold text-slate-900">Create account</h1>
+          <p className="text-slate-600 text-sm">Join the campus lost & found network.</p>
         </div>
 
         <div className="card">
           <form onSubmit={handleSignup} className="space-y-5">
             {error && (
-              <div className="bg-gray-800/50 border border-red-900/30 text-red-400 px-4 py-3 rounded-lg text-sm">
+              <div className="bg-rose-50 border border-rose-200 text-rose-700 px-4 py-3 rounded-lg text-sm">
                 {error}
               </div>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">
-                Full Name
-              </label>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
               <input
                 type="text"
                 placeholder="John Doe"
@@ -89,9 +82,7 @@ export default function Signup() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">
-                Email
-              </label>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">Email</label>
               <input
                 type="email"
                 placeholder="you@example.com"
@@ -103,9 +94,7 @@ export default function Signup() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">
-                Password
-              </label>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">Password</label>
               <input
                 type="password"
                 placeholder="Create a password"
@@ -126,9 +115,9 @@ export default function Signup() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-slate-600">
               Already have an account?{" "}
-              <Link to="/login" className="text-gray-300 hover:text-gray-100 font-medium">
+              <Link to="/login" className="text-emerald-700 hover:text-emerald-600 font-semibold">
                 Sign in
               </Link>
             </p>
