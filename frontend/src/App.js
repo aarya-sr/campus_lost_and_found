@@ -58,6 +58,7 @@ import Products from "./pages/Products";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Support from "./pages/Support";
+import Claims from "./pages/Claims";
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
         <Route path="/report" element={<Products startWithForm />} />
         <Route path="/about" element={<About />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/claims" element={<Claims />} />
         <Route path="/products" element={<Navigate to="/browse" replace />} />
 
         <Route path="/login" element={<Login />} />
@@ -79,4 +81,3 @@ function App() {
 }
 
 export default App;
-
